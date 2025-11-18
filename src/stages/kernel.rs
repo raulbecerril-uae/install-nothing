@@ -36,11 +36,11 @@ impl KernelStage {
             if should_show_progress {
                 let speed_category = rng.gen_range(0..10);
                 let duration = if speed_category < 3 {
-                    rng.gen_range(200..500)
+                    rng.gen_range(600..900)
                 } else if speed_category < 7 {
-                    rng.gen_range(500..1200)
+                    rng.gen_range(900..1200)
                 } else {
-                    rng.gen_range(1200..2500)
+                    rng.gen_range(1200..3500)
                 };
 
                 let progress = ProgressBar::new(ProgressStyle::Block);
@@ -48,11 +48,11 @@ impl KernelStage {
             } else {
                 let speed_category = rng.gen_range(0..10);
                 let delay = if speed_category < 4 {
-                    rng.gen_range(5..20)
+                    rng.gen_range(25..50)
                 } else if speed_category < 8 {
-                    rng.gen_range(20..60)
+                    rng.gen_range(50..100)
                 } else {
-                    rng.gen_range(60..150)
+                    rng.gen_range(100..400)
                 };
 
                 println!("{}", log.dimmed());

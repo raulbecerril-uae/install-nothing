@@ -43,7 +43,11 @@ impl InstallationStage for LocaleStage {
 
         println!();
         let progress = ProgressBar::new(ProgressStyle::Hash);
-        progress.animate("Building locale archive:", rng.gen_range(2000..3000), exit_check)?;
+        progress.animate(
+            "Building locale archive:",
+            rng.gen_range(2000..3000),
+            exit_check,
+        )?;
 
         println!();
         println!("{}", "Configuring timezone...".bright_white());

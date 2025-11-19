@@ -19,22 +19,38 @@ impl InstallationStage for FilesystemStage {
 
         let mut rng = rand::thread_rng();
 
-        println!("{}", "Creating ext4 filesystem on /dev/sda2...".bright_white());
+        println!(
+            "{}",
+            "Creating ext4 filesystem on /dev/sda2...".bright_white()
+        );
         thread::sleep(Duration::from_millis(600));
 
         let blocks = rng.gen_range(50000000..100000000);
         let inodes = blocks / 4;
 
         println!("{}", format!("mke2fs 1.45.5 (07-Jan-2020)").dimmed());
-        println!("{}", format!("Creating filesystem with {} 4k blocks and {} inodes", blocks, inodes).dimmed());
+        println!(
+            "{}",
+            format!(
+                "Creating filesystem with {} 4k blocks and {} inodes",
+                blocks, inodes
+            )
+            .dimmed()
+        );
         thread::sleep(Duration::from_millis(400));
 
         if exit_check() {
             return Err(io::Error::new(io::ErrorKind::Interrupted, "User interrupt"));
         }
 
-        println!("{}", "Filesystem UUID: 8f3e1a2b-4c5d-6e7f-8a9b-0c1d2e3f4a5b".dimmed());
-        println!("{}", format!("Superblock backups stored on blocks:").dimmed());
+        println!(
+            "{}",
+            "Filesystem UUID: 8f3e1a2b-4c5d-6e7f-8a9b-0c1d2e3f4a5b".dimmed()
+        );
+        println!(
+            "{}",
+            format!("Superblock backups stored on blocks:").dimmed()
+        );
 
         let backup_blocks = [32768, 98304, 163840, 229376, 294912];
         for block in &backup_blocks {
@@ -44,16 +60,27 @@ impl InstallationStage for FilesystemStage {
 
         println!();
         let progress = ProgressBar::new(ProgressStyle::Equals);
-        progress.animate("Allocating group tables:", rng.gen_range(2000..3000), exit_check)?;
+        progress.animate(
+            "Allocating group tables:",
+            rng.gen_range(2000..3000),
+            exit_check,
+        )?;
 
         let progress = ProgressBar::new(ProgressStyle::Equals);
-        progress.animate("Writing inode tables:", rng.gen_range(2500..4000), exit_check)?;
+        progress.animate(
+            "Writing inode tables:",
+            rng.gen_range(2500..4000),
+            exit_check,
+        )?;
 
         println!("{}", "Creating journal (32768 blocks): ".dimmed());
         thread::sleep(Duration::from_millis(rng.gen_range(800..1200)));
         println!("{}", "done".bright_green());
 
-        println!("{}", "Writing superblocks and filesystem accounting information: ".dimmed());
+        println!(
+            "{}",
+            "Writing superblocks and filesystem accounting information: ".dimmed()
+        );
         thread::sleep(Duration::from_millis(rng.gen_range(600..1000)));
         println!("{}", "done".bright_green());
 
@@ -73,7 +100,11 @@ impl InstallationStage for FilesystemStage {
             thread::sleep(Duration::from_millis(rng.gen_range(400..700)));
             println!("{}", "Pass 5: Checking group summary information".dimmed());
             thread::sleep(Duration::from_millis(rng.gen_range(300..600)));
-            println!("{}", "/dev/sda2: 11/2048000 files (0.0% non-contiguous), 200000/8192000 blocks".bright_green());
+            println!(
+                "{}",
+                "/dev/sda2: 11/2048000 files (0.0% non-contiguous), 200000/8192000 blocks"
+                    .bright_green()
+            );
         }
 
         Ok(())

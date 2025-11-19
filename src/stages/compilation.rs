@@ -28,7 +28,10 @@ impl InstallationStage for CompilationStage {
         println!("\n{}", format!("> {}", self.name()).bright_yellow().bold());
         println!();
 
-        println!("{}", "make[1]: Entering directory '/usr/src/linux-headers-5.4.0'".dimmed());
+        println!(
+            "{}",
+            "make[1]: Entering directory '/usr/src/linux-headers-5.4.0'".dimmed()
+        );
         println!();
 
         let mut rng = rand::thread_rng();
@@ -70,7 +73,10 @@ impl InstallationStage for CompilationStage {
         }
 
         println!();
-        println!("{}", "make[1]: Leaving directory '/usr/src/linux-headers-5.4.0'".dimmed());
+        println!(
+            "{}",
+            "make[1]: Leaving directory '/usr/src/linux-headers-5.4.0'".dimmed()
+        );
 
         Ok(())
     }

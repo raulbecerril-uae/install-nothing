@@ -14,13 +14,11 @@ impl KernelLogs {
 
         let logs = if log_path.exists() {
             match fs::read_to_string(log_path) {
-                Ok(content) => {
-                    content
-                        .lines()
-                        .filter(|line| !line.trim().is_empty())
-                        .map(|line| Self::strip_timestamp(line))
-                        .collect()
-                }
+                Ok(content) => content
+                    .lines()
+                    .filter(|line| !line.trim().is_empty())
+                    .map(|line| Self::strip_timestamp(line))
+                    .collect(),
                 Err(_) => Self::default_logs(),
             }
         } else {

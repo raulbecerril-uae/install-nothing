@@ -79,7 +79,10 @@ impl InstallationStage for KernelStage {
         self.display_logs(self.kernel_logs.all_logs(), exit_check)?;
 
         println!();
-        println!("{}", "Kernel build completed successfully!".bright_green().bold());
+        println!(
+            "{}",
+            "Kernel build completed successfully!".bright_green().bold()
+        );
 
         thread::sleep(Duration::from_millis(500));
         Ok(())

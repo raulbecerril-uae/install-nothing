@@ -73,7 +73,8 @@ impl DenoLogs {
             "   Compiling libc v0.2.172".to_string(),
             "error: linking with `cc` failed: exit status: 1".to_string(),
             "  = note: clang: error: invalid linker name in argument '-fuse-ld=lld'".to_string(),
-            "error: could not compile `proc-macro2` (build script) due to 1 previous error".to_string(),
+            "error: could not compile `proc-macro2` (build script) due to 1 previous error"
+                .to_string(),
         ]
     }
 }

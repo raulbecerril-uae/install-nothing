@@ -14,13 +14,11 @@ impl BuildLogs {
 
         let logs = if log_path.exists() {
             match fs::read_to_string(log_path) {
-                Ok(content) => {
-                    content
-                        .lines()
-                        .filter(|line| !line.trim().is_empty())
-                        .map(String::from)
-                        .collect()
-                }
+                Ok(content) => content
+                    .lines()
+                    .filter(|line| !line.trim().is_empty())
+                    .map(String::from)
+                    .collect(),
                 Err(_) => Self::default_logs(),
             }
         } else {

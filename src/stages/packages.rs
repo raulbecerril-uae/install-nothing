@@ -47,9 +47,15 @@ impl InstallationStage for PackagesStage {
             }
         }
 
-        println!("\n{}", "Processing triggers for shared libraries...".dimmed());
+        println!(
+            "\n{}",
+            "Processing triggers for shared libraries...".dimmed()
+        );
         thread::sleep(Duration::from_millis(800));
-        println!("{}", "ldconfig: /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1".dimmed());
+        println!(
+            "{}",
+            "ldconfig: /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1".dimmed()
+        );
 
         Ok(())
     }

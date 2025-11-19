@@ -58,8 +58,7 @@ impl Installer {
         println!();
         println!(
             "{}",
-            "*** THIS IS A SIMULATION - NO ACTUAL INSTALLATION OCCURRING ***"
-                .bright_yellow()
+            "*** THIS IS A SIMULATION - NO ACTUAL INSTALLATION OCCURRING ***".bright_yellow()
         );
         println!("{}", "Press Ctrl+C to exit at any time".dimmed());
         println!();
@@ -94,7 +93,9 @@ impl Installer {
             thread::sleep(Duration::from_millis(800));
 
             let mut spinner = Spinner::new();
-            spinner.animate("Reconnecting to mirror.oldsoft.org", 1200, &|| self.check_exit())?;
+            spinner.animate("Reconnecting to mirror.oldsoft.org", 1200, &|| {
+                self.check_exit()
+            })?;
             println!();
         }
         Ok(())
@@ -130,7 +131,8 @@ impl Installer {
             if cycle > 1 {
                 println!(
                     "\n{}",
-                    "═══════════════════════════════════════════════════════════════".bright_magenta()
+                    "═══════════════════════════════════════════════════════════════"
+                        .bright_magenta()
                 );
                 println!(
                     "{}",
@@ -140,7 +142,8 @@ impl Installer {
                 );
                 println!(
                     "{}",
-                    "═══════════════════════════════════════════════════════════════".bright_magenta()
+                    "═══════════════════════════════════════════════════════════════"
+                        .bright_magenta()
                 );
                 thread::sleep(Duration::from_millis(1000));
             }

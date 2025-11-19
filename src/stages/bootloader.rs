@@ -21,19 +21,28 @@ impl InstallationStage for BootloaderStage {
         println!("{}", "Installing GRUB2 bootloader...".bright_white());
         thread::sleep(Duration::from_millis(800));
 
-        println!("{}", "Probing devices for bootloader installation...".dimmed());
+        println!(
+            "{}",
+            "Probing devices for bootloader installation...".dimmed()
+        );
         thread::sleep(Duration::from_millis(600));
 
         let devices = ["/dev/sda", "/dev/nvme0n1", "/dev/vda"];
         let device = devices[rng.gen_range(0..devices.len())];
-        println!("{}", format!("  Installing for x86_64-pc platform to {}", device).dimmed());
+        println!(
+            "{}",
+            format!("  Installing for x86_64-pc platform to {}", device).dimmed()
+        );
         thread::sleep(Duration::from_millis(500));
 
         if exit_check() {
             return Err(io::Error::new(io::ErrorKind::Interrupted, "User interrupt"));
         }
 
-        println!("\n{}", "Generating grub configuration file...".bright_white());
+        println!(
+            "\n{}",
+            "Generating grub configuration file...".bright_white()
+        );
         thread::sleep(Duration::from_millis(700));
 
         let kernels = [
@@ -46,8 +55,14 @@ impl InstallationStage for BootloaderStage {
             if exit_check() {
                 return Err(io::Error::new(io::ErrorKind::Interrupted, "User interrupt"));
             }
-            println!("{}", format!("Found linux image: /boot/{}", kernel).dimmed());
-            println!("{}", format!("Found initrd image: /boot/initrd.img-{}", &kernel[8..]).dimmed());
+            println!(
+                "{}",
+                format!("Found linux image: /boot/{}", kernel).dimmed()
+            );
+            println!(
+                "{}",
+                format!("Found initrd image: /boot/initrd.img-{}", &kernel[8..]).dimmed()
+            );
             thread::sleep(Duration::from_millis(rng.gen_range(200..400)));
         }
 
@@ -61,11 +76,17 @@ impl InstallationStage for BootloaderStage {
             if exit_check() {
                 return Err(io::Error::new(io::ErrorKind::Interrupted, "User interrupt"));
             }
-            print!("\r{}", format!("  Writing stage {} image...", i + 1).dimmed());
+            print!(
+                "\r{}",
+                format!("  Writing stage {} image...", i + 1).dimmed()
+            );
             io::stdout().flush()?;
             thread::sleep(Duration::from_millis(rng.gen_range(400..800)));
         }
-        println!("\r{}", "  Installation finished. No error reported.".bright_green());
+        println!(
+            "\r{}",
+            "  Installation finished. No error reported.".bright_green()
+        );
 
         thread::sleep(Duration::from_millis(500));
 

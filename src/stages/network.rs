@@ -33,9 +33,17 @@ impl InstallationStage for NetworkStage {
             return Err(io::Error::new(io::ErrorKind::Interrupted, "User interrupt"));
         }
 
-        spinner.animate(&format!("Requesting DHCP lease on {}...", interface), 2000, exit_check)?;
+        spinner.animate(
+            &format!("Requesting DHCP lease on {}...", interface),
+            2000,
+            exit_check,
+        )?;
 
-        let ip = format!("192.168.{}.{}", rng.gen_range(0..255), rng.gen_range(2..254));
+        let ip = format!(
+            "192.168.{}.{}",
+            rng.gen_range(0..255),
+            rng.gen_range(2..254)
+        );
         let gateway = format!("192.168.{}.1", rng.gen_range(0..255));
 
         println!("{}", format!("  IP Address: {}", ip).bright_green());

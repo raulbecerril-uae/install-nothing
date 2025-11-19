@@ -20,16 +20,27 @@ impl InstallationStage for DatabaseStage {
         let mut rng = rand::thread_rng();
         let mut spinner = Spinner::new();
 
-        let db_type = if rng.gen_bool(0.5) { "MySQL" } else { "PostgreSQL" };
+        let db_type = if rng.gen_bool(0.5) {
+            "MySQL"
+        } else {
+            "PostgreSQL"
+        };
         let version = if db_type == "MySQL" { "8.0.28" } else { "14.2" };
 
-        println!("{}", format!("Installing {} Server {}...", db_type, version).bright_white());
+        println!(
+            "{}",
+            format!("Installing {} Server {}...", db_type, version).bright_white()
+        );
         thread::sleep(Duration::from_millis(800));
 
         spinner.animate("Initializing database cluster...", 2000, exit_check)?;
 
         if db_type == "PostgreSQL" {
-            println!("{}", "The files belonging to this database system will be owned by user \"postgres\".".dimmed());
+            println!(
+                "{}",
+                "The files belonging to this database system will be owned by user \"postgres\"."
+                    .dimmed()
+            );
             println!("{}", "This user must also own the server process.".dimmed());
             thread::sleep(Duration::from_millis(500));
         }
@@ -55,16 +66,32 @@ impl InstallationStage for DatabaseStage {
 
         println!();
         let progress = ProgressBar::new(ProgressStyle::Equals);
-        progress.animate("Initializing system tables:", rng.gen_range(2000..3500), exit_check)?;
+        progress.animate(
+            "Initializing system tables:",
+            rng.gen_range(2000..3500),
+            exit_check,
+        )?;
 
         println!();
         spinner.animate("Creating template databases...", 1500, exit_check)?;
 
-        println!("{}", "Success. You can now start the database server using:".bright_green());
-        println!("{}", format!("    {} -D /var/lib/{}/data",
-            if db_type == "PostgreSQL" { "pg_ctl" } else { "mysqld" },
-            db_type.to_lowercase()
-        ).dimmed());
+        println!(
+            "{}",
+            "Success. You can now start the database server using:".bright_green()
+        );
+        println!(
+            "{}",
+            format!(
+                "    {} -D /var/lib/{}/data",
+                if db_type == "PostgreSQL" {
+                    "pg_ctl"
+                } else {
+                    "mysqld"
+                },
+                db_type.to_lowercase()
+            )
+            .dimmed()
+        );
 
         Ok(())
     }

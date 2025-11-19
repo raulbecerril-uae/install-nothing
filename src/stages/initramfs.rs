@@ -20,7 +20,14 @@ impl InstallationStage for InitramfsStage {
         let mut rng = rand::thread_rng();
 
         let kernel_version = "5.4.0-42-generic";
-        println!("{}", format!("update-initramfs: Generating /boot/initrd.img-{}", kernel_version).bright_white());
+        println!(
+            "{}",
+            format!(
+                "update-initramfs: Generating /boot/initrd.img-{}",
+                kernel_version
+            )
+            .bright_white()
+        );
         thread::sleep(Duration::from_millis(800));
 
         let modules = [
@@ -46,7 +53,11 @@ impl InstallationStage for InitramfsStage {
 
         println!();
         let progress = ProgressBar::new(ProgressStyle::Block);
-        progress.animate("Copying binaries and libraries:", rng.gen_range(2000..3500), exit_check)?;
+        progress.animate(
+            "Copying binaries and libraries:",
+            rng.gen_range(2000..3500),
+            exit_check,
+        )?;
 
         println!();
         println!("{}", "Creating initramfs image...".bright_white());

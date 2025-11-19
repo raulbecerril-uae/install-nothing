@@ -38,7 +38,7 @@ impl Spinner {
             io::stdout().flush()?;
             thread::sleep(Duration::from_millis(100));
         }
-        print!("\r{} {}\n", "✓".bright_green(), message.bright_white());
+        print!("\r  {}\n", message.bright_white());
         Ok(())
     }
 }

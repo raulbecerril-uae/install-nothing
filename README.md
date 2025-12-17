@@ -4,16 +4,19 @@ A terminal application that simulates installing things. It doesn't actually ins
 
 [![asciicast](https://asciinema.org/a/757039.svg)](https://asciinema.org/a/757039)
 
-## Usage
-Clone the repository
+## Installation
+
+### Download binary
+
+Grab the latest binary for your platform from [Releases](https://github.com/buyukakyuz/install-nothing/releases)
+
 ```bash
-git clone https://github.com/buyukakyuz/install-nothing
+chmod +x install-nothing-*
+./install-nothing-linux-x86_64
 ```
-Go to the repository
-```bash
-cd install-nothing
-```
-And run
+
+### Build from source
+
 ```bash
 cargo run --release
 ```
@@ -42,13 +45,15 @@ cargo run --release -- --help
 
 ## Docker
 
-Build and run:
-
+Build
 ```bash
 docker build -t install-nothing .
-docker run -it --rm --init install-nothing
 ```
 
+Run
+```bash
+docker run -it --rm --init install-nothing
+```
 ## License
 
 Do whatever you want with it. Well, except for movies. If you use this in a movie, credit me or something.

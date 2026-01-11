@@ -1,0 +1,17 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run install-nothing",
+			"type": "shell",
+			"command": "cargo run",
+			"group": "build"
+		},
+		{
+			"label": "Run install-nothing",
+			"type": "shell",
+			"command": "cargo run",
+			"group": "build"
+		}
+	]
+}
